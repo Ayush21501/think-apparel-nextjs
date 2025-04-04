@@ -69,7 +69,7 @@ export const syncUserDeletion = inngest.createFunction(
   }
 );
 
-// fucntion to create user's order in database
+// Innngest fucntion to create user's order in database
 export const createUserOrder = inngest.createFunction(
   {
     id: "create-user-order",
@@ -78,7 +78,7 @@ export const createUserOrder = inngest.createFunction(
       timeout: "5s",
     },
   },
-  { event: "order/create" },
+  { event: "order/created" },
   async ({ events }) => {
     const orders = events.map((event) => {
       return {
