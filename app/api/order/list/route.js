@@ -14,11 +14,12 @@ export async function GET(request) {
     Address.length;
     Product.length;
 
-    const orders = await Order.find({ userId })
+    const orders = await Order.find({
+      userId,
+      $or: [{ paymentType: "COD" }, { paymentType: "Stripe", isPaid: true }],
+    })
       .populate("address")
       .populate("items.product");
-
-    console.log("my orders backend:::::::", orders);
 
     return NextResponse.json({ success: true, orders });
   } catch (error) {

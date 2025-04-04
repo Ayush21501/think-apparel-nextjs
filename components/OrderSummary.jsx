@@ -1,4 +1,4 @@
-import { addressDummyData } from "@/assets/assets";
+import { addressDummyData, assets } from "@/assets/assets";
 import { useAppContext } from "@/context/AppContext";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -17,6 +17,8 @@ const OrderSummary = () => {
   } = useAppContext();
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const [isPlaceOrderClicked, setIsPlaceOrderClicked] = useState(false);
 
   const [userAddresses, setUserAddresses] = useState([]);
 
@@ -242,18 +244,29 @@ const OrderSummary = () => {
         </div>
       </div>
 
-      <button
-        onClick={createOrder}
-        className="w-full bg-orange-600 text-white py-3 mt-5 hover:bg-orange-700"
-      >
-        Place Order
-      </button>
-      <button
-        onClick={createOrderStripe}
-        className="w-full bg-orange-600 text-white py-3 mt-5 hover:bg-orange-700"
-      >
-        Place stripe Order
-      </button>
+      {!isPlaceOrderClicked ? (
+        <button
+          onClick={() => setIsPlaceOrderClicked(true)}
+          className="w-full bg-orange-600 text-white py-3 mt-5 hover:bg-orange-700"
+        >
+          Place Order
+        </button>
+      ) : (
+        <div className="flex gap-2">
+          <button
+            onClick={createOrder}
+            className="w-full bg-orange-600 text-white py-2 mt-5 hover:bg-orange-700"
+          >
+            Cash On Delivery
+          </button>
+          <button
+            onClick={createOrderStripe}
+            className="w-full bg-orange-600 text-white py-2 mt-5 hover:bg-orange-700"
+          >
+            Online Payment
+          </button>
+        </div>
+      )}
     </div>
   );
 };
