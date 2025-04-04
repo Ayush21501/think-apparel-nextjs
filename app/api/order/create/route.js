@@ -35,6 +35,6 @@ export async function POST(request) {
 
     return NextResponse.json({ success: true, message: "Order placed" });
   } catch (error) {
-    NextResponse.json({ sucess: false, message: error.message });
+    return NextResponse.json({ sucess: false, message: error.message });
   }
 }
